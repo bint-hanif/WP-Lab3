@@ -37,5 +37,5 @@ const server = app.listen(port, () => {
 });
 
 //pass requests to the router middleware
-const router = require('./routes/post.js');
+const router = require('./routes/apis.js');
 app.use(router);
