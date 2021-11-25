@@ -20,7 +20,7 @@ const loginControl = (request, response) => {
                     request.session.user = username;
                     request.session.num_client = client[0].num_client;
                     request.session.admin = false;
-                    response.render('loggedin', { human : "Congratulations you are logged in !" });
+                    response.render('loggedin', { human : "You're logged into your account!" });
                 }
             });
         }
