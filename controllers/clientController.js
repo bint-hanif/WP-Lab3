@@ -4,23 +4,23 @@ const loginControl = (request, response) => {
     let username = request.body.username;
     let password = request.body.password;
     if (!username || !password) {
-        response.render('loggedin', { human : "Login Failed" });;
+        response.render('postlog', { human : "Login Failed" });;
     } else {
         if (request.session && request.session.user) {
-            response.render('loggedin', { human : "Already logged in" });
+            response.render('postlog', { human : "Already logged in" });
         } else {
             clientServices.loginService(username, password, function(err, dberr, client) {
                 console.log("Client from login service :" + JSON.stringify(client));
                 if (client === null) {
                     console.log("Auhtentication problem!");
-                    response.render('loggedin', { human : "Login Failed" });
+                    response.render('postlog', { human : "Login Failed" });
                 }else {
                     console.log("User from login service :" + client[0].num_client);
                     //add to session
                     request.session.user = username;
                     request.session.num_client = client[0].num_client;
                     request.session.admin = false;
-                    response.render('loggedin', { human : "You're logged into your account!" });
+                    response.render('postlog', { human : "You're logged into your account!" });
                 }
             });
         }

@@ -26,10 +26,11 @@ function findByUsername(username, callback) {
     });
 }
 
-function findNumUsername(num_client, callback) {
-    const selectClient = (`SELECT username from account where num_client like '${num_client}';`);
+function findByNumclient(num, callback) {
+    const selectClient = (`SELECT * from client where num_client like '${num}';`);
     database.getResult(selectClient, function(err, rows) {
         if (!err) {
+            console.log(rows)
             callback(null, rows);
         } else {
             console.log(err);
@@ -37,11 +38,10 @@ function findNumUsername(num_client, callback) {
     });
 }
 
-function findByNumclient(num, callback) {
-    const selectClient = (`SELECT * from client where num_client like '${num}';`);
+function findNumUsername(num_client, callback) {
+    const selectClient = (`SELECT username from account where num_client like '${num_client}';`);
     database.getResult(selectClient, function(err, rows) {
         if (!err) {
-            console.log(rows)
             callback(null, rows);
         } else {
             console.log(err);
