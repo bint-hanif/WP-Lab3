@@ -1,9 +1,10 @@
 const { Client } = require('../models/entities');
 const clientDAO = require('../db/clientDAO');
+//loads bcrypt module
 const bcrypt = require("bcryptjs");
 
 const loginService = (typedUsername, typedPassword, callback) => {
-    //check if the user is in the DB
+    //query database for users password, uses callback pattern
     clientDAO.findByUsername(typedUsername, function(err, rows) {
         if (err) {
             throw err;
@@ -18,6 +19,7 @@ const loginService = (typedUsername, typedPassword, callback) => {
             var user = rows[0].username;
             var hash = rows[0].password;
             console.log(`Known user ${num}, ${user}, ${hash}`);
+            //compare hash and password
             bcrypt.compare(typedPassword, hash, function(err2, isMatch) {
                 if (err2) {
                     throw err2;
